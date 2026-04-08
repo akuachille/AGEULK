@@ -22,8 +22,20 @@ AGEULK is the General Association of Students at ULK. This website showcases the
 
 ## Getting Started
 1. Clone this repository to your local machine.
-2. Open `Index.html` in your web browser.
+2. Open `index.html` in your web browser.
 3. Browse sections like About, Leadership, Services, and Contact.
+
+## Deployment on GitHub Pages
+This project is configured for deployment on GitHub Pages.
+
+1. Go to your repository settings on GitHub.
+2. Navigate to the "Pages" section.
+3. Under "Source", select "Deploy from a branch".
+4. Choose the `main` branch and `/ (root)` folder.
+5. Save the settings.
+6. Your site will be available at `https://kingachille-123.github.io/AGEULK/`.
+
+Note: The `.nojekyll` file ensures GitHub Pages serves the site as static files without Jekyll processing.
 
 ## Contributing
 Contributions are welcome! If you have suggestions or improvements, please open a pull request with a clear description and code changes.
