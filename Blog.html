@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGEULK Blog</title>
+    <link rel="stylesheet" href="CSS/Index.css">
+    <link rel="icon" type="image/jpeg" href="Utilities/Ageulk logo.jpeg">
+</head>
+<body>
+      <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <img src="Utilities/Ageulk logo.jpeg" alt="AGEULK Logo" class="logo-image">
+                <span class="logo-text">AGEULK</span>
+            </div>
+            <nav class="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="Index.html" class="nav-link">Home</a></li>
+                    <li><a href="Index.html#about" class="nav-link">About Us</a></li>
+                    <li><a href="Index.html#committee" class="nav-link">AGEULK Leadership</a></li>
+                    <li><a href="Index.html#university-leadership" class="nav-link">University Leadership</a></li>
+                    <li><a href="Index.html#events" class="nav-link">Services</a></li>
+                    <li><a href="Index.html#contact" class="nav-link">Contact</a></li>
+                    <li><a href="Blog.html" class="nav-link">Blog</a></li>
+                </ul>
+            </nav>
+            <div class="navbar-actions">
+                <button class="theme-toggle" id="themeToggle" title="Toggle Theme">☀️</button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            </div>
+        </div>
+    </header>
+
+        <!-- Main Content -->
+    <main class="blog-content">
+        <section class="blog-hero glass-effect">
+            <div class="container">
+                <h1>Welcome to the AGEULK Blog</h1>
+                <p>Explore news, events, and member stories from the General Association of Students at ULK.</p>
+            </div>
+        </section>
+
+        <section class="blog-posts">
+            <article class="blog-post glass-effect">
+                <div class="blog-thumbnail">
+                    <img src="Utilities/Ageulk logo.jpeg" alt="Student Leadership Workshop" />
+                </div>
+                <div class="blog-meta">
+                    <span class="blog-date">July 15, 2026</span>
+                    <span class="blog-category">Events</span>
+                </div>
+                <h2>Upcoming Event: Student Leadership Workshop</h2>
+                <p>Join us for an exciting workshop on student leadership, where we will discuss strategies for effective leadership and community engagement.</p>
+                <div class="blog-full-content visually-hidden">
+                    <p>Join us for an exciting workshop on student leadership, where we will discuss strategies for effective leadership and community engagement. Date: July 15, 2026. Location: ULK Main Auditorium. This session is designed for student leaders who want to expand their skills, network with peers, and support a stronger campus community.</p>
+                </div>
+                <a class="read-more" href="#">Read more</a>
+            </article>
+
+            <article class="blog-post glass-effect">
+                <div class="blog-thumbnail">
+                    <img src="Utilities/Ageulk logo.jpeg" alt="Annual General Meeting" />
+                </div>
+                <div class="blog-meta">
+                    <span class="blog-date">June 28, 2026</span>
+                    <span class="blog-category">Updates</span>
+                </div>
+                <h2>AGEULK Annual General Meeting Recap</h2>
+                <p>Our Annual General Meeting was a great success! We discussed our achievements over the past year and outlined our goals for the upcoming year.</p>
+                <div class="blog-full-content visually-hidden">
+                    <p>Our Annual General Meeting was a great success! We discussed our achievements over the past year and outlined our goals for the upcoming year. Thank you to everyone who attended and contributed to the discussion. Highlights included new club initiatives, enhanced student support services, and expanded leadership training programs.</p>
+                </div>
+                <a class="read-more" href="#">Read more</a>
+            </article>
+
+            <article class="blog-post glass-effect">
+                <div class="blog-thumbnail">
+                    <img src="Utilities/Ageulk logo.jpeg" alt="Student Spotlight" />
+                </div>
+                <div class="blog-meta">
+                    <span class="blog-date">May 12, 2026</span>
+                    <span class="blog-category">Spotlight</span>
+                </div>
+                <h2>Student Spotlight: Achievements of Our Members</h2>
+                <p>We are proud to highlight the achievements of our members this month and celebrate outstanding student contributions.</p>
+                <div class="blog-full-content visually-hidden">
+                    <p>We are proud to highlight the achievements of our members. This month, we celebrate Jane Doe for her outstanding contributions to the community and her academic excellence. Keep up the great work, Jane! Our spotlight section also shares how students can nominate peers and participate in AGEULK's mentorship and awards programs.</p>
+                </div>
+                <a class="read-more" href="#">Read more</a>
+            </article>
+        </section>
+    </main>
+
+    <div id="blogModal" class="blog-modal" aria-hidden="true" role="dialog" aria-labelledby="blogModalTitle" aria-modal="true">
+        <div class="blog-modal-overlay"></div>
+        <div class="blog-modal-content glass-effect">
+            <button type="button" class="modal-close" aria-label="Close blog details">×</button>
+            <div class="modal-header">
+                <span class="modal-category"></span>
+                <h2 id="blogModalTitle"></h2>
+                <span class="modal-date"></span>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+        <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 AGEULK - General Association of Students at ULK. All rights reserved.</p>
+            <p>Empowering students through community and excellence.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -188,6 +188,19 @@ function updateActiveNavigation() {
     updateActive();
 }
 
+function highlightCurrentPageLink() {
+    const currentPage = window.location.pathname.split('/').pop().toLowerCase() || 'index.html';
+    document.querySelectorAll('.nav-link').forEach(link => {
+        const href = link.getAttribute('href');
+        const linkedPage = href.split('#')[0].split('/').pop().toLowerCase();
+        if (linkedPage === currentPage || (linkedPage === '' && currentPage === 'index.html')) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
 // ============================================
 // Intersection Observer for Fade-in Effects
 // ============================================
@@ -232,6 +245,83 @@ function initCTAButton() {
             }
         });
     }
+}
+
+// ============================================
+// Blog Read More Modal
+// ============================================
+
+function openBlogModal(article) {
+    const modal = document.getElementById('blogModal');
+    if (!modal) return;
+
+    const modalTitle = modal.querySelector('#blogModalTitle');
+    const modalDate = modal.querySelector('.modal-date');
+    const modalCategory = modal.querySelector('.modal-category');
+    const modalBody = modal.querySelector('.modal-body');
+    const articleTitle = article.querySelector('h2');
+    const fullContent = article.querySelector('.blog-full-content');
+    const blogDate = article.querySelector('.blog-date');
+    const blogCategory = article.querySelector('.blog-category');
+
+    if (modalTitle && articleTitle) {
+        modalTitle.textContent = articleTitle.textContent;
+    }
+    if (modalDate && blogDate) {
+        modalDate.textContent = blogDate.textContent;
+    }
+    if (modalCategory && blogCategory) {
+        modalCategory.textContent = blogCategory.textContent;
+    }
+    if (modalBody && fullContent) {
+        modalBody.innerHTML = fullContent.innerHTML;
+    }
+
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeBlogModal() {
+    const modal = document.getElementById('blogModal');
+    if (!modal) return;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+}
+
+function initBlogModal() {
+    const blogPosts = document.querySelectorAll('.blog-post');
+    const modal = document.getElementById('blogModal');
+    const modalClose = modal ? modal.querySelector('.modal-close') : null;
+
+    blogPosts.forEach(post => {
+        const readMore = post.querySelector('.read-more');
+        if (readMore) {
+            readMore.addEventListener('click', (e) => {
+                e.preventDefault();
+                openBlogModal(post);
+            });
+        }
+    });
+
+    if (modalClose) {
+        modalClose.addEventListener('click', closeBlogModal);
+    }
+
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target.classList.contains('blog-modal') || e.target.classList.contains('blog-modal-overlay')) {
+                closeBlogModal();
+            }
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && modal.classList.contains('open')) {
+            closeBlogModal();
+        }
+    });
 }
 
 // ============================================
@@ -391,9 +481,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeTheme();
     initParallax();
     enhanceSmoothScroll();
+    highlightCurrentPageLink();
     updateActiveNavigation();
     initIntersectionObserver();
     initCTAButton();
+    initBlogModal();
     initNavbarScroll();
     initScrollToTop();
     checkResponsive();
