@@ -472,6 +472,114 @@ function throttle(func, limit) {
 }
 
 // ============================================
+// Image Lightbox
+// ============================================
+
+function initLightbox() {
+    const lightbox = document.getElementById('imageLightbox');
+    if (!lightbox) return;
+
+    const lightboxImg = document.getElementById('lightboxImage');
+    const closeBtn = lightbox.querySelector('.lightbox-close');
+    const downloadBtn = document.getElementById('lightboxDownload');
+    const shareBtn = document.getElementById('lightboxShare');
+    const overlay = lightbox.querySelector('.lightbox-overlay');
+
+    let currentImageSrc = '';
+    let currentImageName = '';
+
+    function attachGalleryListeners() {
+        const modalBodyImages = document.querySelectorAll('#blogModal .blog-gallery img');
+        modalBodyImages.forEach(img => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', (e) => {
+                currentImageSrc = e.target.src;
+                currentImageName = currentImageSrc.substring(currentImageSrc.lastIndexOf('/') + 1) || 'image.jpg';
+                
+                lightboxImg.src = currentImageSrc;
+                lightbox.classList.add('open');
+                lightbox.setAttribute('aria-hidden', 'false');
+            });
+        });
+    }
+
+    const modalBody = document.querySelector('#blogModal .modal-body');
+    if (modalBody) {
+        const observer = new MutationObserver(() => {
+            attachGalleryListeners();
+        });
+        observer.observe(modalBody, { childList: true, subtree: true });
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        lightboxImg.src = '';
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    overlay.addEventListener('click', closeLightbox);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('open')) {
+            closeLightbox();
+        }
+    });
+
+    downloadBtn.addEventListener('click', async () => {
+        try {
+            const response = await fetch(currentImageSrc);
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = currentImageName;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            a.remove();
+        } catch (err) {
+            console.error('Error downloading image:', err);
+            alert('Failed to download image.');
+        }
+    });
+
+    shareBtn.addEventListener('click', async () => {
+        if (navigator.share) {
+            try {
+                const response = await fetch(currentImageSrc);
+                const blob = await response.blob();
+                const file = new File([blob], currentImageName, { type: blob.type });
+
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    await navigator.share({
+                        title: 'AGEULK Blog Image',
+                        text: 'Check out this image from the AGEULK Blog!',
+                        files: [file]
+                    });
+                } else {
+                    await navigator.share({
+                        title: 'AGEULK Blog Image',
+                        text: 'Check out this image from the AGEULK Blog!',
+                        url: currentImageSrc
+                    });
+                }
+            } catch (err) {
+                console.error('Error sharing image:', err);
+            }
+        } else {
+            navigator.clipboard.writeText(currentImageSrc).then(() => {
+                alert('Image link copied to clipboard!');
+            }).catch(err => {
+                console.error('Error copying link:', err);
+                alert('Failed to copy link.');
+            });
+        }
+    });
+}
+
+// ============================================
 // Initialize All Features on Page Load
 // ============================================
 
@@ -490,6 +598,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollToTop();
     checkResponsive();
     initKeyboardNavigation();
+    initLightbox();
 });
 
 // ============================================

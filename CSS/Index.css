@@ -1018,6 +1018,27 @@ body.dark-theme .modal-close {
     font-size: 1.05rem;
 }
 
+.blog-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.blog-gallery img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.blog-gallery img:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
 .visually-hidden {
     position: absolute !important;
     width: 1px;
@@ -1255,4 +1276,89 @@ body.dark-theme .modal-close {
 .blog-post p {
     line-height: 1.8;
     color: var(--text-secondary);
+}
+
+/* ============================================
+   IMAGE LIGHTBOX
+   ============================================ */
+
+.image-lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    padding: 1.5rem;
+}
+
+.image-lightbox.open {
+    display: flex;
+}
+
+.lightbox-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+}
+
+.lightbox-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.lightbox-content img {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    object-fit: contain;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    border: none;
+    background: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    color: #333;
+}
+
+.lightbox-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.lightbox-btn {
+    padding: 0.5rem 1.25rem;
+    border: none;
+    background: linear-gradient(135deg, #0066CC, #22C55E);
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.lightbox-btn:hover {
+    transform: scale(1.05);
 }
